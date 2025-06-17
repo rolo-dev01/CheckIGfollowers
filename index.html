@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Instagram Seguidores - Interactivo</title>
+  <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --primary: #405de6;
+      --secondary: #833ab4;
+      --background: #fafafa;
+      --card-bg: #fff;
+      --text-color: #222;
+      --accent: #e1306c;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--background);
+      margin: 0;
+      padding: 2rem;
+      color: var(--text-color);
+    }
+    .container {
+      max-width: 720px;
+      margin: auto;
+      background: var(--card-bg);
+      padding: 2.5rem 3rem;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    input[type="file"] {
+      width: 100%;
+      padding: 0.4rem;
+      border: 1.5px solid #ccc;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      padding: 0.8rem 1.8rem;
+      margin-top: 1.8rem;
+      cursor: pointer;
+      font-size: 1.1rem;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background: var(--accent);
+    }
+    details {
+      background: #f0f0f0;
+      margin-top: 1.5rem;
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+      cursor: pointer;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+    }
+    summary {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--secondary);
+    }
+    ul {
+      margin-top: 1rem;
+      padding-left: 1.4rem;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    li {
+      margin-bottom: 0.4rem;
+    }
+    a.username {
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    a.username:hover {
+      text-decoration: underline;
+    }
+
+    details.tutorial {
+      margin-top: 2.5rem;
+      background: #fffbe6;
+      border-left: 5px solid var(--accent);
+      border-radius: 10px;
+      padding: 1rem 1.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      cursor: pointer;
+    }
+
+    details.tutorial summary {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    details.tutorial ol {
+      padding-left: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    details.tutorial li {
+      margin: 0.8rem 0;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Instagram Seguidores - Comparador</h1>
+
+    <label for="followersFile">📥 Archivo de <strong>seguidores</strong> (followers.html):</label>
+    <input type="file" id="followersFile" accept=".html" />
+
+    <label for="followingFile">📤 Archivo de <strong>seguidos</strong> (following.html):</label>
+    <input type="file" id="followingFile" accept=".html" />
+
+    <button onclick="comparar()">🔍 Comparar Listas</button>
+
+    <details id="noMeSiguenSection" style="display:none;">
+      <summary>🚫 No me siguen de vuelta</summary>
+      <ul id="noMeSiguen"></ul>
+    </details>
+
+    <details id="yoNoSigoSection" style="display:none;">
+      <summary>👀 Yo no los sigo (pero ellos sí)</summary>
+      <ul id="yoNoSigo"></ul>
+    </details>
+
+    <details class="tutorial">
+      <summary>📖 ¿Cómo obtener los archivos desde la app móvil de Instagram?</summary>
+      <div>
+        <ol>
+          <li>📱 Abre la app de <strong>Instagram</strong> en tu móvil.</li>
+          <li>👤 Toca en tu <strong>perfil</strong> (abajo a la derecha).</li>
+          <li>☰ Pulsa el icono de las <strong>tres líneas</strong> arriba a la derecha.</li>
+          <li>⚙️ Entra en <strong>Centro de cuentas</strong>.</li>
+          <li>🔐 Ve a <strong>Tu información y tus permisos</strong>.</li>
+          <li>📦 Toca en <strong>Descargar tu información</strong>.</li>
+          <li>📤 Luego selecciona <strong>Descargar o transferir información</strong>.</li>
+          <li>📁 Elige <strong>Seleccionar parte de tu información</strong>.</li>
+          <li>🔍 Marca la opción de <strong>Seguidores y seguidos</strong>.</li>
+          <li>💾 En destino, selecciona <strong>Descargar en este dispositivo</strong>.</li>
+          <li>📅 En intervalo de fechas, elige <strong>Desde el principio</strong>.</li>
+          <li>🧾 En formato, selecciona <strong>HTML</strong>.</li>
+          <li>✅ Toca <strong>Siguiente</strong> y luego <strong>Crear archivo</strong>.</li>
+          <li>📨 Espera a que Instagram te notifique que está listo.</li>
+          <li>🗂️ Descarga el archivo ZIP, ábrelo y ve a la carpeta <code>followers_and_following</code>.</li>
+          <li>📄 Sube los archivos <code>followers_1.html</code> y <code>following.html</code> aquí arriba.</li>
+        </ol>
+        <p>🎉 ¡Listo! Ya puedes ver quién no te sigue de vuelta 🚀</p>
+      </div>
+    </details>
+  </div>
+
+  <script>
+    function extraerUsuarios(htmlContent) {
+      const doc = new DOMParser().parseFromString(htmlContent, "text/html");
+      const anchors = doc.querySelectorAll("a");
+      const usuarios = [];
+      anchors.forEach(a => {
+        const username = a.textContent.trim();
+        if (username && !usuarios.includes(username)) {
+          usuarios.push(username);
+        }
+      });
+      return usuarios;
+    }
+
+    function leerArchivo(input, callback) {
+      const file = input.files[0];
+      if (!file) {
+        alert("Por favor, selecciona un archivo.");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => callback(reader.result);
+      reader.readAsText(file);
+    }
+
+    function crearLista(usernames) {
+      if (usernames.length === 0) {
+        return '<li><em>No hay usuarios para mostrar</em></li>';
+      }
+      return usernames.map(u => `<li><a class="username" href="https://instagram.com/${u}" target="_blank" rel="noopener noreferrer">@${u}</a></li>`).join('');
+    }
+
+    function comparar() {
+      document.getElementById('noMeSiguenSection').style.display = 'none';
+      document.getElementById('yoNoSigoSection').style.display = 'none';
+      document.getElementById('noMeSiguen').innerHTML = '';
+      document.getElementById('yoNoSigo').innerHTML = '';
+
+      leerArchivo(document.getElementById('followersFile'), followersHTML => {
+        leerArchivo(document.getElementById('followingFile'), followingHTML => {
+          const seguidores = extraerUsuarios(followersHTML);
+          const seguidos = extraerUsuarios(followingHTML);
+
+          const setSeguidores = new Set(seguidores);
+          const setSeguidos = new Set(seguidos);
+
+          const noMeSiguen = seguidos.filter(u => !setSeguidores.has(u));
+          const yoNoSigo = seguidores.filter(u => !setSeguidos.has(u));
+
+          document.getElementById('noMeSiguen').innerHTML = crearLista(noMeSiguen);
+          document.getElementById('yoNoSigo').innerHTML = crearLista(yoNoSigo);
+
+          document.getElementById('noMeSiguenSection').style.display = 'block';
+          document.getElementById('yoNoSigoSection').style.display = 'block';
+        });
+      });
+    }
+
+    // Render emojis al estilo Apple con Twemoji
+    window.onload = () => {
+      twemoji.parse(document.body);
+    };
+  </script>
+</body>
+</html>
